@@ -30,6 +30,13 @@ DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
 
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1001868871195')) #Log channel id ( make sure bot is admin )
 
+# Clone Info :-
+CLONE_MODE = bool(environ.get('CLONE_MODE', False)) # Set True or False
+
+# If Clone Mode Is True Then Fill All Required Variable, If False Then Don't Fill.
+CLONE_DB_URI = environ.get("CLONE_DB_URI", "")
+CDB_NAME = environ.get("CDB_NAME", "clonetechvj")
+
 #force sub channel id, if you want enable force sub
 FORCE_SUB_CHANNEL = int(os.environ.get("FORCE_SUB_CHANNEL", "-1001473043276"))
 FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "-1001644866777"))
