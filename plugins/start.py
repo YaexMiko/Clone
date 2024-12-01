@@ -109,6 +109,21 @@ REPLY_ERROR = "<code>Use this command as a reply to any telegram message without
     
 @Bot.on_message(filters.command('start') & filters.private)
 async def not_joined(client: Client, message: Message):
+# Check subscription status for both channels
+    sub1 = await is_subscribed(None, client, message)
+    sub2 = await is_subscribed2(None, client, message)
+
+
+    # Prepare buttons based on subscription status
+    buttons = []
+    if not sub1 and FORCE_SUB_CHANNEL:
+        buttons.append(
+            [InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink),]
+        )
+    if not sub2 and FORCE_SUB_CHANNEL2:
+        buttons.append(
+            [InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink2),]
+        )
     buttons = [
         [
             InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink),
@@ -119,8 +134,7 @@ async def not_joined(client: Client, message: Message):
         buttons.append(
             [
                 InlineKeyboardButton(
-                    text='• ᴛʀʏ ᴀɢᴀɪɴ •',
-                    url=f"https://t.me/{client.username}?start={message.command[1]}"
+                    text='• ᴛʀʏ ᴀɢᴀɪɴ •',                   url=f"https://t.me/{client.username}?start={message.command[1]}"
                 )
             ]
         )
